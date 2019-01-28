@@ -23,6 +23,20 @@ describe('PaymentQueryValidateTest...', () => {
         let result = PaymentQueryValidator.validate(req).params;
         let value;
 
+        assert.ok(!result.hasOwnProperty("paymentDate"), 
+            "expect that key 'paymentDate' not exists in result of validate BUT it is");
+        assert.ok(result.hasOwnProperty("payments.paymentDate"), 
+            "expect that key 'payments.paymentDate' exists in result of validate BUT not");
+        value = result["payments.paymentDate"];
+        assert.ok(value instanceof Date,
+            "expect that datatype of the query key payments.paymentDate should be Date BUT "+typeof value);
+        assert.ok(!result.hasOwnProperty("customerNumber"), 
+            "expect that key 'customerNumber' not exists in result of validate BUT it is");
+        assert.ok(result.hasOwnProperty("payments.customerNumber"), 
+            "expect that key 'payments.customerNumber' exists in result of validate BUT not");
+        value = result["payments.customerNumber"];
+        assert.ok(typeof value === "number",
+            "expect that datatype of the query key payments.customerNumber should be number BUT "+typeof value);
     });
 });
 

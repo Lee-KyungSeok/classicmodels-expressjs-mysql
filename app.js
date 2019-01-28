@@ -6,9 +6,9 @@ const express = require('express');
 const http = require('http');
 const path = require('path');
 const bodyParser = require('body-parser');
-const errorhandler = require('errorhandler')
-const methodOverride = require('method-override')
-const cors = require('cors')
+const errorhandler = require('errorhandler');
+const methodOverride = require('method-override');
+const cors = require('cors');
 
 const app = express();
 const connection  = require('express-myconnection'); 
@@ -33,7 +33,7 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(methodOverride('X-HTTP-Method-Override'))
+app.use(methodOverride('X-HTTP-Method-Override'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploaded', express.static(path.join(__dirname, 'uploaded')));
@@ -43,7 +43,7 @@ require('./router')(app);
 
 // development only
 if ('development' == app.get('env')) {
-  app.use(errorhandler())
+  app.use(errorhandler());
 }
 
 const server = http.createServer(app);
